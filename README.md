@@ -22,3 +22,7 @@ O cadastro só fica aberto até a primeira vitrine ser criada; depois disso `/ca
 ## Publicar (Vercel)
 
 Importe o repositório na Vercel, configure as mesmas variáveis de ambiente (com `NEXT_PUBLIC_SITE_URL` = URL do site) e, no Supabase, adicione essa URL em **Authentication → URL Configuration**.
+
+## Teste de ponta a ponta
+
+Com o site rodando (`npm run dev`), `npx playwright test` percorre o fluxo inteiro num celular simulado: a vendedora cria a vitrine, categorias e produtos, e um visitante busca, filtra, monta o carrinho e gera o pedido de WhatsApp. O teste usa uma conta de demonstração própria, apaga a vitrine dela no final e salva os prints em `docs/screens/`.
