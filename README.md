@@ -10,7 +10,7 @@ Stack: Next.js 16 + Supabase (Auth, Postgres com RLS, Storage).
 ## Como rodar
 
 1. Crie um projeto grátis em [supabase.com](https://supabase.com).
-2. No **SQL Editor**, cole e rode o conteúdo de `supabase/migrations/20261024000000_init.sql`.
+2. No **SQL Editor**, cole e rode, nesta ordem, o conteúdo de cada arquivo em `supabase/migrations/` (`20261024000000_init.sql` e depois `20261025000000_store_logo.sql`).
 3. Para a demonstração, desligue a confirmação de e-mail: **Authentication → Sign In / Providers → Email → Confirm email** (desmarcar). Assim o cadastro entra direto no painel.
 4. Copie `.env.example` para `.env.local` e preencha com a URL e a chave `anon` (**Project Settings → API**).
 5. `npm install` e `npm run dev` → http://localhost:3000
@@ -22,6 +22,8 @@ O cadastro só fica aberto até a primeira vitrine ser criada; depois disso `/ca
 ## Publicar (Vercel)
 
 Importe o repositório na Vercel, configure as mesmas variáveis de ambiente (com `NEXT_PUBLIC_SITE_URL` = URL do site) e, no Supabase, adicione essa URL em **Authentication → URL Configuration**.
+
+No plano grátis, o Supabase pausa o projeto depois de ~7 dias sem acesso (o site passa a dar erro em tudo que usa o banco). Para evitar isso, o `vercel.json` agenda um cron diário que chama `/api/keep-alive`, que faz uma consulta simples ao banco. Opcional: defina `CRON_SECRET` na Vercel para que só o cron consiga chamar essa rota. Se o projeto chegar a ser pausado, basta abrir o painel do Supabase e clicar em **Resume project**.
 
 ## Teste de ponta a ponta
 
